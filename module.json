@@ -7,7 +7,7 @@
 		"./src/fallout5e.js"
 	],
 	"styles":[
-
+		"./styles/fallout5e.css"
 	],
 	"packs": [
         {
@@ -26,6 +26,6 @@
 	"compatibleCoreVersion": "0.6.6",
 	"url": "https://github.com/sparkcity/fallout5e",
 	"manifest": "https://raw.githubusercontent.com/sparkcity/fallout5e/master/module.json",
-	"download": "https://github.com/sparkcity/fallout5e/releases/download/v1.0/module.zip",
+	"download": "https://github.com/sparkcity/fallout5e/raw/master/module.zip",
 	"readme": "https://github.com/sparkcity/fallout5e/blob/master/README.md"
   }
