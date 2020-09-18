@@ -1,5 +1,8 @@
 import { DND5E } from '/systems/dnd5e/module/config.js';
 import ActorSheet5eCharacter from "/systems/dnd5e/module/actor/sheets/character.js";
+//import Actor5e from "/systems/dnd5e/module/actor/entity.js";
+import  ActorSheet5eNPC from "/systems/dnd5e/module/actor/sheets/npc.js";
+import  ItemSheet5e from "/systems/dnd5e/module/item/sheet.js";
 
 //Changing out deprecated 5e skills to the replacement
 DND5E.skills["arc"] = "Science";
@@ -73,8 +76,8 @@ DND5E.toolProficiencies["herl"]="Herramientas de ladrón";
 DND5E.toolProficiencies["veht"]="Vehículos de tierra";
 DND5E.toolProficiencies["veha"]="Vehículos de aire";
 
-//character sheet registration
-
+//Fallout sheet registration
+    //character sheet
 class FalloutCharacterSheet extends ActorSheet5eCharacter {
 	static get defaultOptions() {
 	  console.log("~~~~~~~~~~~FALLOUT CHARACTER SHEET ACTIVE~~~~~~~~~~~");
@@ -83,7 +86,48 @@ class FalloutCharacterSheet extends ActorSheet5eCharacter {
 	  return options;
 	}
   }
-  Actors.registerSheet("dnd5e", FalloutCharacterSheet, { 
+Actors.registerSheet("dnd5e", FalloutCharacterSheet, { 
     types: ["character"],
-    makeDefault: false 
+    makeDefault: true 
+});
+    //NPC sheet
+class FalloutNPCSheet extends ActorSheet5eNPC {
+	static get defaultOptions() {
+	  console.log("~~~~~~~~~~~FALLOUT NPC SHEET ACTIVE~~~~~~~~~~~");
+	  const options = super.defaultOptions;
+	  options.classes.push('fallout5e');
+	  return options;
+	}
+  }
+Actors.registerSheet("dnd5e", FalloutNPCSheet, { 
+    types: ["npc"],
+    makeDefault: true 
+});
+    //item sheet
+class FalloutItemSheet extends ItemSheet5e {
+    static get defaultOptions() {
+        const options = super.defaultOptions;
+        options.classes.push('fallout5e');
+        return options;
+    }
+}
+
+Items.registerSheet("dnd5e", FalloutItemSheet, { 
+    types: ["spell","weapon","equipment","loot","tool","backpack","consumable","class","feat"],
+    makeDefault: true 
+});
+
+
+//Adding a place for radiation tracking
+Hooks.on("renderActorSheet", (app, html, data) => {
+	const counters = html.find("div.counters");
+	const flags = data.actor.flags.fallout5e || {};
+	counters.append(`
+	<div class="counter flexrow radiation">
+    <h4>Radiation</h4>
+    <div class="counter-value">
+      <input type="text" size="5" name="flags.fallout5e.radiation" placeholder="0" value="${flags.radiation ?? 0}" data-dtype="Number"/>
+    </div>
+	</div>
+	`);
 });

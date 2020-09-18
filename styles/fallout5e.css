@@ -21,6 +21,25 @@
   /* ----------------------------------------- */
   /*  Flexbox                                  */
   /* ----------------------------------------- */
+
+  body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    background-image: url("../assets/appbg.jpg");
+    background-repeat: repeat;
+    background-size: auto;
+    font-family: "Signika", sans-serif;
+    font-size: 14px;
+    box-shadow: 0 0 50vw #000 inset;
+  }
+  body.background {
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
   .flexrow {
     display: flex;
     flex-direction: row;
@@ -684,9 +703,11 @@
   .fallout5e.dnd5e.sheet.actor ul.skills-list li.skill .skill-ability {
     flex: 0 0 26px;
     text-transform: capitalize;
+    color: #89f089;
   }
   .fallout5e.dnd5e.sheet.actor ul.skills-list li.skill .skill-mod {
     flex: 0 0 20px;
+    color: #89f089;
   }
   .fallout5e.dnd5e.sheet.actor ul.skills-list li.skill .skill-passive {
     flex: 0 0 26px;
